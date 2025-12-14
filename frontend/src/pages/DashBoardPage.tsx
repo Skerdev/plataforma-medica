@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import "./DashboardPage.css";
+
 
 interface Cita {
   id: number;
@@ -68,27 +70,43 @@ export default function DashboardPage() {
   // Vista (HTML)
   // ------------------------------
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Bienvenido, {user?.nombre}</h2>
+    <div className="dashboard-container">
+
+      <div className="dashboard-header">
+        <h2>Bienvenido, {user?.nombre}</h2>
+        <p>Gestiona tus citas médicas</p>
+      </div>
+
+      <div className="dashboard-image">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2966/2966486.png"
+          alt="Citas médicas"
+        />
+      </div>
+
       <h3>Tus próximas citas</h3>
 
       {citas.length === 0 ? (
         <p>No tienes citas programadas.</p>
       ) : (
-        <ul>
+        <ul className="citas-list">
           {citas.map((cita) => (
-            <li key={cita.id} style={{ marginBottom: "15px" }}>
-              <strong>{cita.servicio}</strong> — {cita.fecha} a las {cita.hora}
+            <li key={cita.id} className="cita-item">
+              <strong>{cita.servicio}</strong>
+              <p>{cita.fecha} — {cita.hora}</p>
 
-              <div style={{ marginTop: "5px" }}>
+              <div className="cita-actions">
                 <button
+                  className="btn-cancelar"
                   onClick={() => cancelarCita(cita.id)}
-                  style={{ marginRight: "10px" }}
                 >
                   Cancelar
                 </button>
 
-                <button onClick={() => setCitaEditando(cita)}>
+                <button
+                  className="btn-reagendar"
+                  onClick={() => setCitaEditando(cita)}
+                >
                   Reagendar
                 </button>
               </div>
@@ -97,19 +115,8 @@ export default function DashboardPage() {
         </ul>
       )}
 
-      {/* --------------------------------------------------- */}
-      {/* Formulario para editar / reagendar */}
-      {/* --------------------------------------------------- */}
       {citaEditando && (
-        <div
-          style={{
-            marginTop: "20px",
-            padding: "15px",
-            border: "1px solid #ccc",
-            background: "#f8f8f8",
-            width: "300px",
-          }}
-        >
+        <div className="form-reagendar">
           <h3>Reagendar cita</h3>
 
           <label>Fecha:</label>
@@ -117,10 +124,7 @@ export default function DashboardPage() {
             type="date"
             value={citaEditando.fecha}
             onChange={(e) =>
-              setCitaEditando({
-                ...citaEditando,
-                fecha: e.target.value,
-              })
+              setCitaEditando({ ...citaEditando, fecha: e.target.value })
             }
             style={{ width: "100%", marginBottom: "10px" }}
           />
@@ -130,10 +134,7 @@ export default function DashboardPage() {
             type="time"
             value={citaEditando.hora}
             onChange={(e) =>
-              setCitaEditando({
-                ...citaEditando,
-                hora: e.target.value,
-              })
+              setCitaEditando({ ...citaEditando, hora: e.target.value })
             }
             style={{ width: "100%", marginBottom: "10px" }}
           />
@@ -152,6 +153,8 @@ export default function DashboardPage() {
           </button>
         </div>
       )}
+
     </div>
   );
+
 }

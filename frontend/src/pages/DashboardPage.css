@@ -1,0 +1,62 @@
+.dashboard-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  color: white;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-image {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.dashboard-image img {
+  max-width: 300px;
+  opacity: 0.9;
+}
+
+.citas-list {
+  list-style: none;
+  padding: 0;
+}
+
+.cita-card {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.cita-card p {
+  margin: 5px 0;
+}
+
+.cita-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.cita-actions button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-cancelar {
+  background-color: #c0392b;
+  color: white;
+}
+
+.btn-reagendar {
+  background-color: #2980b9;
+  color: white;
+}
